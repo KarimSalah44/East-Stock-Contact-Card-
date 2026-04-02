@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>إيست ستوك | بطاقة تواصل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent: #f97316;
+            --glass-border: rgba(255,255,255,0.12);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0e2a, #030617);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(249,115,22,0.08), transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            animation: bgShift 12s infinite alternate;
+        }
+        @keyframes bgShift {
+            0%   { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 1;   transform: scale(1.05); }
+        }
+
+        /* ===== البنر (المعدل) ===== */
+        .news-ticker {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 24px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            border: 1px solid rgba(249,115,22,0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            height: 44px;
+            position: relative;
+            direction: ltr; /* لضمان حركة الأنيميشن بشكل صحيح من اليسار لليمين */
+        }
+
+        .ticker-track {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            white-space: nowrap;
+            width: max-content;
+            animation: tickerMove 25s linear infinite;
+            will-change: transform;
+        }
+
+        /* حركة مستمرة من اليسار لليمين */
+        @keyframes tickerMove {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .ticker-track span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.93rem;
+            font-weight: 700;
+            padding: 0 24px;
+            color: #fff;
+            flex-shrink: 0;
+            direction: rtl; /* الحفاظ على اتجاه النص العربي */
+        }
+
+        .ticker-track span i {
+            color: var(--accent);
+            font-size: 0.95rem;
+            filter: drop-shadow(0 0 3px #f97316);
+        }
+
+        .ticker-track span .txt {
+            background: linear-gradient(120deg, #fff 30%, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .news-ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        /* ===== الكارد ===== */
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(12,15,44,0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 38px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(249,115,22,0.1);
+            padding: 2rem 1.7rem;
+            text-align: center;
+            animation: floatIn 0.8s cubic-bezier(0.2,0.9,0.4,1.1);
+        }
+        @keyframes floatIn {
+            0%   { opacity: 0; transform: translateY(35px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-container { margin-bottom: 1rem; display: flex; justify-content: center; }
+        .logo-img {
+            width: 160px; height: auto;
+            border-radius: 28px;
+            background: transparent; border: none;
+            box-shadow: 0 0 0 2px rgba(249,115,22,0.3), 0 0 20px rgba(249,115,22,0.6), 0 8px 20px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            display: block; object-fit: contain;
+        }
+        .logo-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 2px rgba(249,115,22,0.6), 0 0 32px #f97316, 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 2.3rem; font-weight: 900;
+            margin: 0.5rem 0 0.2rem;
+            background: linear-gradient(135deg, #FFE6C7, #FFB347, #f97316);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            letter-spacing: -0.5px; display: inline-block;
+            transition: text-shadow 0.3s;
+        }
+        h1:hover { text-shadow: 0 0 18px #f97316, 0 0 5px #ffae5a; }
+
+        .tagline {
+            font-size: 0.85rem;
+            background: rgba(255,255,240,0.1);
+            display: inline-block; padding: 4px 14px;
+            border-radius: 40px; color: #ffd7a5;
+            font-weight: 500; margin-bottom: 1.8rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===== أزرار عائمة ===== */
+        .links-container { display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 2rem; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; padding: 1rem; border-radius: 50px;
+            text-decoration: none; font-weight: 800; font-size: 1.08rem;
+            position: relative; backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border); letter-spacing: 0.3px; overflow: hidden;
+            transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, color 0.35s ease, transform 0.15s ease;
+        }
+        .btn i { font-size: 1.5rem; transition: transform 0.25s ease; }
+        .btn:active { transform: scale(0.97) !important; transition: 0.07s !important; }
+
+        .btn-whatsapp {
+            background: rgba(37,211,102,0.12); color: #2ecc71; border-color: rgba(37,211,102,0.4);
+            animation: floatWhats 3s ease-in-out infinite, slideUpBtn 0.5s ease-out 0.2s backwards;
+        }
+        .btn-whatsapp:hover {
+            background: #25D366; color: #fff; border-color: transparent;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 25px -8px rgba(37,211,102,0.5), 0 0 12px #25D366;
+            animation: none;
+        }
+        .btn-whatsapp:hover i { transform: scale(1.1); }
+
+        .btn-telegram {
+            background: rgba(42,171,238,0.12); color: #4ab3f5; border-color: rgba(42,171,238,0.4);
+            animation: floatTele 3s ease-in-out 0.9s infinite, slideUpBtn 0.5s ease-out 0.35s backwards;
+        }
+        .btn-telegram:hover {
+            background: #2aabee; color: #fff; border-color: transparent;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 25px -8px rgba(42,171,238,0.5), 0 0 12px #2aabee;
+            animation: none;
+        }
+        .btn-telegram:hover i { transform: scale(1.1); }
+
+        @keyframes floatWhats {
+            0%,100% { transform: translateY(0);    box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+            50%     { transform: translateY(-7px); box-shadow: 0 14px 22px rgba(0,0,0,0.25), 0 0 14px rgba(37,211,102,0.25); }
+        }
+        @keyframes floatTele {
+            0%,100% { transform: translateY(0);    box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+            50%     { transform: translateY(-7px); box-shadow: 0 14px 22px rgba(0,0,0,0.25), 0 0 14px rgba(42,171,238,0.25); }
+        }
+        @keyframes slideUpBtn {
+            from { opacity: 0; transform: translateY(25px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== معلومات ===== */
+        .extra-info {
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.3rem 1.2rem;
+            text-align: right;
+            border: 1px solid rgba(249,115,22,0.2);
+            margin-bottom: 1.4rem;
+        }
+
+        .info-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.92rem; line-height: 1.5;
+            color: #f0f0f0; font-weight: 500;
+            animation: fadeSlideItem 0.5s ease-out backwards;
+        }
+        .info-item:last-child { margin-bottom: 0; }
+        .extra-info .info-item:nth-child(1) { animation-delay: 0.25s; }
+        .extra-info .info-item:nth-child(2) { animation-delay: 0.4s; }
+        .extra-info .info-item:nth-child(3) { animation-delay: 0.55s; }
+
+        @keyframes fadeSlideItem {
+            from { opacity: 0; transform: translateX(-15px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        .info-item > i {
+            color: var(--accent); font-size: 1.2rem;
+            min-width: 28px; text-align: center;
+            filter: drop-shadow(0 0 4px #f97316); margin-top: 2px;
+        }
+
+        /* رابط العنوان */
+        .address-link {
+            color: #f5e7d3;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(249,115,22,0.45);
+            transition: 0.2s; font-weight: 500; flex: 1;
+            word-break: break-word; display: block;
+        }
+        .address-link:hover {
+            color: #ffb347;
+            border-bottom-color: #f97316;
+            text-shadow: 0 0 4px rgba(249,115,22,0.35);
+        }
+
+        .email-link {
+            color: #ffcf9a; text-decoration: none;
+            border-bottom: 1px dashed #f97316;
+            transition: 0.2s; font-weight: 600;
+        }
+        .email-link:hover { color: #ffb347; text-shadow: 0 0 3px #f97316; }
+
+        .info-item span { color: #f5e7d3; word-break: break-word; flex: 1; }
+
+        /* ===== فوتر بسيط ===== */
+        .footer-simple {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            font-weight: 400;
+            letter-spacing: 0.4px;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 1.6rem; }
+            .logo-img { width: 130px; }
+            h1 { font-size: 1.9rem; }
+            .btn { font-size: 0.95rem; padding: 0.85rem; }
+            .info-item { font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="news-ticker">
+        <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://iili.io/BqO5xgn.jpg" alt="إيست ستوك" class="logo-img">
+        </div>
+
+        <h1>Eaststock</h1>
+
+        <div class="tagline">
+            <i class="fas fa-chalkboard-user"></i> لتجارة مستلزمات الدعاية والإعلان
+        </div>
+
+        <div class="links-container">
+            <a href="https://wa.me/201040009913?text=أهلاً%20أرغب%20في%20الاستفسار%20عن%20منتجاتكم" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                تواصل معنا عبر واتساب
+                <i class="fas fa-chevron-left" style="font-size:0.8rem;opacity:0.8;"></i>
+            </a>
+            <a href="https://t.me/Eaststock" class="btn btn-telegram" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
+                قناتنا على تليجرام
+                <i class="fas fa-chevron-left" style="font-size:0.8rem;opacity:0.8;"></i>
+            </a>
+        </div>
+
+        <div class="extra-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a class="address-link"
+                   href="https://www.google.com/maps/search/طنطا+دوران+الجملة+بجوار+القادسية+للأدوات+المنزلية"
+                   target="_blank">
+                    طنطا – دوران الجملة – بجوار القادسية للأدوات المنزلية
+                </a>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span><a href="mailto:Eaststock@Gmail.com" class="email-link">Eaststock@Gmail.com</a></span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span>السبت – الخميس: 11 ص – 8 م</span>
+            </div>
+        </div>
+
+        <p class="footer-simple">© 2026 Eaststock — إيست ستوك</p>
+    </div>
+
+<script>
+const items = [
+    { icon: 'fas fa-bullhorn', text: 'أقوى العروض على مستلزمات الدعاية والإعلان 🔥' },
+    { icon: 'fas fa-tags',     text: 'خصومات وعروض حصرية علي الكميات لفترة محدودة' },
+    { icon: 'fab fa-whatsapp', text: 'تواصل عبر واتساب للاستفسار الفوري' },
+    { icon: 'fab fa-telegram', text: 'انضم لقناتنا على تليجرام وعروض حصرية' },
+    { icon: 'fas fa-star',     text: 'خدمة التوصيل لكل أنحاء الجمهورية' },
+];
+
+const track = document.getElementById('tickerTrack');
+
+// وظيفة لإنشاء العناصر
+function createTickerItems() {
+    items.forEach(item => {
+        const span = document.createElement('span');
+        span.innerHTML = `<i class="${item.icon}"></i><span class="txt">${item.text}</span>`;
+        track.appendChild(span);
+    });
+}
+
+// إضافة العناصر مرتين لضمان استمرارية الحركة (Infinite Loop)
+createTickerItems();
+createTickerItems();
+
+// في حال كانت العناصر قليلة جداً، نكررها مرة ثالثة لضمان ملء المساحة
+if (track.scrollWidth < window.innerWidth * 2) {
+    createTickerItems();
+}
+</script>
+</body>
+</html>
+ 
